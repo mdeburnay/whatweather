@@ -1,10 +1,20 @@
-function areNumbersConsecutive(number) {
-  return number
-    .toString()
-    .split("")
-    .every((digit, i, arr) => {
-      return i === arr.length - 1 ? +digit : +digit + 1 === +arr[i + 1];
-    });
-}
+var countGoodTriplets = function (arr, a, b, c) {
+  let triples = 0;
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      for (let k = i + 2; k < arr.length; k++) {
+        if (
+          i < j &&
+          j < k &&
+          Math.abs(arr[i] - arr[j]) <= a &&
+          Math.abs(arr[j] - arr[k]) <= b &&
+          Math.abs(arr[i] - arr[k]) <= c
+        )
+          triples++;
+      }
+    }
+  }
+  return triples;
+};
 
-console.log(areNumbersConsecutive(12345));
+console.log(countGoodTriplets([3, 0, 1, 1, 9, 7], 7, 2, 3));
